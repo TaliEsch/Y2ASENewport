@@ -1,3 +1,8 @@
+# ATTENTION
+
+## This is a revised version of the application with security keys removed, as it is a public repository. As a result several features may not work
+
+
 # ASE-2022-Y2-10
 
 
