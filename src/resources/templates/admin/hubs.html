@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Hubs</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link rel="stylesheet" th:href="@{/css/hubs.css}"/>
+    <link rel="icon" href="../images/sapling.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+<h1>All the hubs:</h1>
+
+<a class="link-block" href="/admin/home">Back to admin homepage</a>
+<a th:href="@{/admin/hub/add}" class="link-block">Add a hub</a>
+<div class="grid-container">
+    <div class="grid-item" th:each="hub : ${hubs}">
+        <p th:text="${hub.hubName}"></p>
+        <p th:text="${hub.whichR}"></p>
+        <p th:text="${hub.categoriesList}"></p>
+        <a class="link" th:href="@{${hub.link}}" th:text="${hub.link}"></a>
+        <p th:text="${hub.address}"></p>
+<!--        <p th:text="${hub.latitude}"></p>-->
+<!--        <p th:text="${hub.longitude}"></p>-->
+        <p th:text="'Phone Number:  ' + ${hub.phoneNumber}"></p>
+        <a th:href="@{/admin/hub/{hubId}/edit (hubId=${hub.hubId})}" class="link-block">
+            <buttom>Edit</buttom>
+        </a>
+        <form th:action="@{/admin/hub/{hubId}/delete (hubId=${hub.hubId})}" class="deleteForm" method="POST">
+            <button class="link-block delete" type="submit">Delete</button>
+        </form>
+    </div>
+    <script type="text/javascript" th:src="@{/javaScript/deleteComfirmation.js}"></script>
+</div>
+</div>
+
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+
+</body>
+</html>

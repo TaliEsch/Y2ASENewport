@@ -1,0 +1,211 @@
+#searchFilterContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+#searchBlock{
+    display: flex;
+}
+
+#filterBlock{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#searchBar{
+    width: 70%;
+    height: 2.5rem;
+    margin: 1rem 0 0 0;
+    font-size: 1.4rem;
+    align-self: center;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.1);
+    text-align: start;
+    padding-left: 1rem;
+}
+
+.dropdownFilters {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+#createNewContainer{
+    width: 25%;
+    align-self: center;
+    justify-self: center;
+}
+
+#searchBlock{
+    display: flex;
+    flex-direction: column;
+}
+
+.category {
+    margin: 1rem 3.6vw 0;
+    width: 15rem;
+    height: 3rem;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.1);
+    font-size: 1.1rem;
+    text-align: center;
+    border: none;
+}
+
+.searchFilterLabel{
+    width: 0;
+    height: 0;
+}
+
+.linkToCreate {
+    margin: 1rem 3.6vw 0;
+    width: 15rem;
+    height: 3rem;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.1);
+    background-color: #79797973;
+    text-align: center;
+    font-size: 1.1rem;
+    border: none;
+    color: white;
+    padding: 10px 4px 10px;
+
+    text-decoration: none;
+    display: inline-block;
+
+    cursor: pointer;
+}
+
+.mainContentContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3rem;
+    justify-content: center;
+}
+
+.contentBox{
+    margin: 0.5rem;
+    border: 0.2rem solid #f2f2f2;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 1 23rem;
+}
+
+
+.contentItemName{
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.contentItemImage{
+    height: auto;
+    width: auto;
+    max-width: 22rem;
+    max-height: 8rem;
+}
+
+.namePriceBox {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.contentNamePrice {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.contentSaleType {
+    align-self: center;
+    align-content: center;
+    align-items: center;
+}
+
+.contentDescription {
+    text-align: center;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+#searchError{
+    font-size: 3.4rem;
+    text-align: center;
+    margin-top: 10rem;
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+a:active {
+    color: black;
+    text-decoration: none;
+}
+
+
+
+@media (max-width: 768px) {
+    #searchFilterContainer{
+        flex-direction: column;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+
+    .dropdownFilters{
+        width: 100%;
+    }
+
+    #filterBlock{
+        flex-direction: column;
+    }
+
+    #filterLabel{
+        flex-direction: column;
+    }
+
+    #createNewContainer{
+        width: 100%;
+        display: contents;
+    }
+
+    #searchBar{
+        width: 90%;
+    }
+
+    .filterLabel{
+        height: 0.5rem;
+    }
+
+    .linkToCreate {
+        margin: 1rem 3.6vw 0;
+    }
+
+    .dropdownFilters {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .category{
+        align-self: center;
+    }
+
+    #createListing{
+        align-self: center;
+    }
+
+
+}

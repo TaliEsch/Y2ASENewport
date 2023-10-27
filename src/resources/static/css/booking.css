@@ -1,0 +1,20 @@
+a.link-block{
+    text-align: center;
+    color: black;
+}
+
+a.link-block:hover{
+    background: #2e8a8abf;
+}
+
+a.card-body{
+    color: rgba(43, 43, 44, 0.82);
+}
+
+a.card-body:hover {
+    color: black
+}
+
+.card, h2{
+    text-align: center;
+}

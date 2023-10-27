@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Admin Login</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link rel="icon" href="../images/sapling.png">
+    <link rel="stylesheet" th:href="@{/css/admin-login.css}"/>
+    <!-- Thymeleaf styling stuff goes here -->
+
+</head>
+<body>
+<!-- Thymeleaf header goes here -->
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+<h1>Admin Login</h1>
+
+<div class ="form">
+
+    <form th:action="@{/admin/login}" th:method ="post" th:object="${adminLoginForm}">
+
+        <!-- Using thymeleaf, base class names. Enables support for to import basic css styling. These may be altered
+        if we use more customised styling -->
+        <div class="field">
+            <label class="form-label" for="username">Username:</label>
+            <input class="form-control" th:field="*{username}" type="text" required/>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{username}"
+                 th:if="${#fields.hasErrors('username')}">Username Error</div>
+        </div>
+
+        <div class="field">
+            <label class="form-label" for="password">Password:</label>
+            <input class="form-control" th:field="*{password}" type="password" required/>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{password}"
+                 th:if="${#fields.hasErrors('username')}">Password Error</div>
+        </div>
+
+        <div class = "field">
+            <button>Submit</button>
+        </div>
+        <div class = "hidden">
+            <input type = "hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </div>
+
+    </form>
+
+</div>
+</div>
+<!-- Thymeleaf footer goes here -->
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>

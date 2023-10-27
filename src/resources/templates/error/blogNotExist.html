@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog error</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link rel="stylesheet" th:href="@{/css/error.css}"/>
+    <link rel="icon" href="../images/sapling.png">
+</head>
+<body>
+<!--Header-->
+<div th:replace="fragments/header :: header"></div>
+
+<h1>Sorry this doesn't exist</h1>
+
+
+<!--Footer-->
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Blog</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link rel="stylesheet" th:href="@{/css/individualBlog.css}"/>
+    <link rel="icon" href="../images/sapling.png">
+    <link rel="stylesheet" th:href="@{/css/adminView.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+    <div id="blogIndividual">
+        <div class="blog" th:object="${blog}">
+            <!--Blog title is required from the form-->
+            <h3 th:text="*{blogTitle}"></h3>
+
+            <!-- If image is null-->
+            <div class="details">
+                <div id="blogImage" th:if="*{itemImage != null}">
+                    <img th:src="*{'data:image;base64,' + itemImage}">
+                </div>
+                <!-- if statements stop fields from showing if they are null-->
+                <div class="description">
+                    <p th:if="*{username != null}" th:text="'User: '+*{username}"></p>
+                    <p th:if="*{itemName != null}" th:text="'Item: '+*{itemName}"></p>
+                    <p th:if="*{itemCategory != null}" th:text="'Item category: '+*{itemCategory}"></p>
+                    <p th:if="*{blogContact != null}" th:text="'Item description: '+*{blogContact}"></p>
+                    <!--Description is required from the form-->
+                    <h5>Description:</h5>
+                    <p th:text="*{itemDescription}"></p>
+                </div>
+            </div>
+
+        <!--This form should appear when the button is clicked-->
+            <form id="commentForm" th:action="@{/blog/{blogId} (blogId=${blog.blogId})}" th:method ="POST" th:object="${comment}">
+                <h3 class="commentTitle">Make a comment</h3>
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="username">Display name:</label>
+                    <input type="text" class="form-control" id="username"  name="username" th:field="*{username}" maxlength="40" required>
+                    <!--error -->
+                    <div class="alert alert-warning" th:errors="*{username}" th:if="${#fields.hasErrors('username')}">Username Error</div>
+                </div>
+
+                <!-- Comment -->
+                <div class="form-group">
+                    <label for="commentText">Comment:</label>
+                    <textarea maxlength="1000" class="form-control" type="text" id="commentText"  name="commentText" rows="3" th:field="*{commentText}" required ></textarea>
+                    <!--error -->
+                    <div class="alert alert-warning" th:errors="*{commentText}" th:if="${#fields.hasErrors('commentText')}">Comment Error </div>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" >Submit</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="comments">
+            <h3 class="commentTitle">Comments</h3>
+            <!--When there is no comment-->
+            <div th:if="${#lists.isEmpty(comments)}">
+                <p>No comments</p>
+            </div>
+
+            <!--When there is comment-->
+            <div th:if="${!#lists.isEmpty(comments)}" th:each="comment : ${comments}" class="comment">
+                <p th:text="${comment.username}"></p>
+                <p th:text="${comment.commentText}"></p>
+                <!--Admin-->
+                <div sec:authorize="hasRole('ADMIN')">
+                    <form th:action="@{/blog/{blogId}/comment/{Id}/delete (Id=${comment.commentId},blogId=${blog.blogId})}"
+                          class="deleteForm" method="POST">
+                        <button class="deleteButton delete" type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script sec:authorize="hasRole('ADMIN')" type="text/javascript" th:src="@{/javaScript/deleteComfirmation.js}"></script>
+</div>
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>

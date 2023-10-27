@@ -1,0 +1,30 @@
+/*Form*/
+/*Center of the page*/
+form{
+    text-align: center;
+
+}
+
+.field{
+    margin-bottom:0.5rem;
+}
+
+/*Overwritting bootstraps style*/
+.form-control{
+    width: 20rem;
+    padding:0rem;
+}
+
+button{
+    position: relative;
+    top: 1rem;
+}
+
+.theWords{
+    display: inline-block;
+}
+
+.toMyAsterisk{
+    display: inline-block;
+    color: red;
+}

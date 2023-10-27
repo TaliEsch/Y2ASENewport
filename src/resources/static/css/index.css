@@ -1,0 +1,49 @@
+#body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+ }
+#mySlideShow{
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45rem;
+    margin-top: 10px;
+}
+
+.carousel-item{
+    max-height: 300px;
+    width: auto;
+}
+
+.textBox{
+    box-shadow: 1px 1px 130px lightgrey;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    background-color: white;
+}
+/* Override the default bootstrap style of the carousel indicators */
+.img-fluid {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+
+    #mySlideShow{
+        max-height: 100000px;
+        width: 90%;
+        padding: 0;
+    }
+
+    #textBox{
+        width: 90%;
+        max-height: 1000000px;
+    }
+}

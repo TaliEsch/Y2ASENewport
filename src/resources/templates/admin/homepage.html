@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Admin homepage</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link rel="icon" href="../images/sapling.png">
+    <link rel="stylesheet" th:href="@{/css/admin-homepage.css}"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+<h1>Admin homepage</h1>
+<a th:href="@{/admin/hubs}">
+    <div class="link-block">See the hub</div>
+</a>
+<a th:href="@{/admin/index/save}">
+    <div class="link-block">Update Homepage</div>
+</a>
+
+<form th:action="@{/admin/logout}" method="POST">
+    <div class="link-block">
+    <button class="logout-button" type="submit">Logout</button>
+    </div>
+</form>
+</div>
+
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Add hubs</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link rel="stylesheet" th:href="@{/css/hub-forms.css}"/>
+    <link rel="icon" href="../images/sapling.png">
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+<h1>Add hub</h1>
+
+    <!--Add hubs form-->
+    <form class="center-form" th:action="@{/admin/hub/add}" th:method="post" th:object="${hubForm}">
+    <!--input fields for hubName, link, address, postcode-->
+        <label for="hubName">Hub Name</label>
+        <input type="text" id="hubName"  th:field="*{hubName}" name="hubName" required>
+        <!--        error -->
+        <div class="alert alert-warning" th:errors="*{hubName}" th:if="${#fields.hasErrors('hubName')}">Hub Name Error</div>
+
+        <label for="whichR">Which R (Recycling, reuse, repair)</label>
+        <input type="text" id="whichR"  th:field="*{whichR}" name="whichR" required>
+        <!--        error -->
+        <div class="alert alert-warning" th:errors="*{whichR}" th:if="${#fields.hasErrors('whichR')}">Which R Error</div>
+
+        <div>
+            <label class="categoryLabel" for="categoriesList">Category</label><br>
+            <select id="categoriesList" th:field="*{categoriesList}" name="categoriesList" multiple required>
+                <option th:each="category : ${categories}" th:value="${category.categoryName}" th:text="${category.categoryName}"></option>
+            </select>
+            <p>(To select multiple options please hold control)</p>
+            <!--        error -->
+            <div class="alert alert-warning" th:errors="*{categoriesList}" th:if="${#fields.hasErrors('categoriesList')}">categoriesList Error</div>
+        </div>
+
+        <label for="link">Website link</label>
+        <input type="text" id="link" th:field="*{link}" name="link" required>
+        <!--        error -->
+        <div class="alert alert-warning" th:errors="*{link}" th:if="${#fields.hasErrors('link')}">Link Error</div>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" th:field="*{address}" name="address" required>
+        <!--        error -->
+        <div class="alert alert-warning" th:errors="*{address}" th:if="${#fields.hasErrors('address')}">Address Error</div>
+
+        <label for="postcode">Postcode</label>
+        <input type="text" id="postcode" th:field="*{postcode}" name="postcode" required>
+        <!--        error -->
+        <div class="alert alert-warning" th:errors="*{postcode}" th:if="${#fields.hasErrors('postcode')}">Postcode Error</div>
+
+        <label for="phoneNumber">Phone Number</label>
+        <input id="phoneNumber" required th:field="*{phoneNumber}">
+        <!--        error -->
+        <div class="alert alert-warning" th:errors="*{phoneNumber}"
+             th:if="${#fields.hasErrors('phoneNumber')}">Phone Number Field ERROR</div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+
+</body>
+</html>

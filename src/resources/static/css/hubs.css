@@ -1,0 +1,45 @@
+h1{
+    text-align: center;
+}
+
+button{
+    border: none;
+    padding: 5px;
+    padding-left: 24px;
+    padding-right: 27px;
+    border-radius: 5px;
+    margin: 0;
+    background: transparent;
+    border: none;
+}
+
+button.link-block:hover{
+    background-color: #e87676;
+}
+
+.grid-item{
+    color: #424242;
+}
+
+a.link{
+    color: #a82626;
+}
+a.link:hover{
+    color: #e87676;
+}
+
+a.link-block:hover{
+    color: #232323;
+    background: rgba(53, 159, 113, 0.75);
+}
+
+.link-block{
+    width: 95%;
+    height: 2rem;
+}
+
+div.link-block, a.link-block{
+    margin-left: auto;
+    margin-right: auto;
+}
+

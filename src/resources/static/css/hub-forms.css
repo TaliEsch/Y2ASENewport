@@ -1,0 +1,9 @@
+/*Used for both adding hub form and edit hub form*/
+/*Form categories selections*/
+#categoriesList{
+    height: auto;
+}
+
+button{
+    margin-top: 0.5rem;
+}

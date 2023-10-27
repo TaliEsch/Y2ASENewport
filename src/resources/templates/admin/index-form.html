@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Item</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link th:replace="fragments/header :: bootstrap-css">
+    <link rel="icon" href="../images/sapling.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/index-form.css}"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<h1>Adjust homepage</h1>
+<!--form that submits post request-->
+<div id="formContainer">
+    <form th:action="@{/}" th:method="post" th:object="${indexForm}" enctype="multipart/form-data">
+        <div class="field">
+            <label> Homepage Description </label><br>
+            <textarea class="form-control" th:field="*{description}" required rows="3"></textarea><br>
+            <span class="alert alert-warning" th:if="${#fields.hasErrors('description')}"
+                  th:errors="*{description}">
+            description error
+        </span>
+        </div>
+        <input class="form-control img" th:field="*{image1}" type="file" name="img" accept="image/*"><br>
+        <span class="alert alert-warning" th:if="${#fields.hasErrors('image1')}" th:errors="*{image1}">
+                Image1 error
+            </span>
+        <input class="form-control img" th:field="*{image2}" type="file" name="img" accept="image/*"><br>
+        <span class="alert alert-warning" th:if="${#fields.hasErrors('image2')}" th:errors="*{image2}">
+                Image2 error
+            </span>
+        <input class="form-control img" th:field="*{image3}" type="file" name="img" accept="image/*"><br>
+        <span class="alert alert-warning" th:if="${#fields.hasErrors('image3')}" th:errors="*{image3}">
+                Image3 error
+            </span>
+        <input class="form-control img" th:field="*{image4}" type="file" name="img" accept="image/*"><br>
+        <span class="alert alert-warning" th:if="${#fields.hasErrors('image4')}" th:errors="*{image4}">
+                Image4 error
+            </span>
+        <span class="alert alert-warning" id="imageError"></span>
+        <button type="submit">submit</button>
+    </form>
+</div>
+<script type="text/javascript" th:src="@{/javaScript/ImageValidator.js}"></script>
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: bootstrap-js"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+
+

@@ -1,0 +1,64 @@
+    <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Item Display</title>
+    <link rel="stylesheet" href="/css/buyRentItem.css">
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <!-- Thymeleaf base styling -->
+    <link rel="icon" href="../images/sapling.png">
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!-- Thymeleaf header -->
+<div class="contentContainer">
+<div class = "allContent">
+    <div class = "leftContent" th:object="${buyRent}" th:each="buyRent: ${allBuyRent}">
+        <p class="contentItemName" th:text="*{itemName}"></p>
+        <div class="namePriceBox">
+            <p class="contentNamePriceType" th:text="'Seller: '+ *{username}"></p>
+            <div class="contentNamePriceType" th:if="*{itemSaleType == '0'}">
+                <p class="paragraphNamePriceType" th:text="'£' + *{price}"></p>
+            </div>
+            <div class="contentNamePriceType" th:if="*{itemSaleType == '1'}">
+                <p class="paragraphNamePriceType" th:text="'£' + *{price} + '  (PerWeek)'"></p>
+            </div>
+            <div class="contentNamePriceType"  th:if="*{itemSaleType == '0'}">
+                <p class="paragraphNamePriceType" th:text="('Avaliable To Buy')"></p>
+            </div>
+            <div class="contentNamePriceType" th:if="*{itemSaleType == '1'}">
+                <p class="paragraphNamePriceType" th:text="('Avalaible To Rent')"></p>
+            </div>
+        </div>
+
+        <div th:if="*{imageB64 != null}">
+            <img class="contentItemImage" th:src="*{'data:image;base64,' + imageB64}">
+        </div>
+        <div th:if="*{imageB64 == null}">
+            <img class="contentItemImage" src="/images/noImage.jpg">
+        </div>
+        <p class="contentDescription" th:text="*{description}"></p>
+    </div>
+    <form class = "rightContent" th:method="POST" th:action="@{/buyRent/item/response}" th:object="${buyRentEmailForm}">
+        <label class="contentItemName" for="message" > Message The Seller</label>
+        <textarea class="messageBox" th:field="*{message}" placeholder="Message to seller" ></textarea>
+
+        <input th:field="*{itemId}" th:default="*{itemId}" th:hidden="true" th:readonly="true">
+
+        <p id="formDisclaimer">(please ensure you include a method for the seller to contact you)</p>
+        <!-- Contact info -->
+        <label class="contentItemName" for="contactInfo" ></label>
+        <input id="contactInfo" th:field="*{emailAddress}" th:default="*{emailAddress}"
+               placeholder="email address" type="email">
+        <button class="submit" type="submit">Submit</button>
+    </form>
+
+</div>
+</div>
+
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+<!-- Thymeleaf footer and footer styling -->
+</body>
+</html>

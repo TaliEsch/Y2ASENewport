@@ -1,0 +1,8 @@
+h1{
+/*    display on the middle of the page in bold*/
+    text-align: center;
+    font-weight: bold;
+    font-size: 3rem;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}

@@ -1,0 +1,19 @@
+.form{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+/*Overwritting bootstraps style*/
+.field{
+    text-align: center;
+}
+
+.form-label{
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+}

@@ -1,0 +1,239 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*body is 100% of the screen*/
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Footer*/
+/*Goes at the bottom and stays there */
+.footer{
+    background-color: #2c7c6c;
+    margin-top: auto;
+}
+
+#footer-link{
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+}
+
+#copyright{
+    color: black;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+/*nav*/
+.navbarContainer {
+    height: auto;
+}
+
+.navbar{
+    font-family: 'Poppins', sans-serif;
+    background-color: #2c7c6c;
+    min-width: 100%;
+    border-bottom-left-radius: 3rem;
+    font-size: 1.25rem;
+    height: 5rem;
+    flex-wrap: nowrap;
+}
+
+.container{
+    padding-left: 0;
+    margin-left: 8%;
+    margin-right: 8%;
+    max-width: 90%;
+}
+
+.logo{
+    margin-left: 1.2rem;
+}
+
+.hamburger{
+    display: none;
+}
+
+.hamburgerBar{
+    display: block;
+    width: 2.2rem;
+    height: 3px;
+    margin: 9px 1.2rem 9px auto;
+    background: black;
+}
+
+@media (max-width: 768px) {
+    .navbarContainer{
+        transition: height 0.5s ease-in;
+        height: 5.5rem;
+    }
+    .navbar{
+        border-bottom-left-radius: 0;
+    }
+
+    .container{
+        top: 0;
+        max-width: 100%;
+        width: 100%;
+        left: -200%;
+        margin-left: 0;
+        margin-top: 5rem;
+        position: absolute;
+        flex-direction: column;
+        text-align: center;
+        transition: 0.5s;
+        height: auto;
+        background-color: #2c7c6c;
+    }
+
+    .containerItem{
+        width: 100%;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-right: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.5);
+    }
+
+    .containerItem:Hover{
+        background-color: #0e4d3f;
+    }
+
+    .navbarContainer.active{
+        height: 20rem;
+        transition: height 0.2s ease;
+    }
+
+    .container.active {
+        left: 0;
+        margin-left: 0;
+        padding-right: 0;
+        border-bottom: 1px solid black;
+    }
+
+    .hamburger{
+        display: block;
+        cursor: pointer;
+    }
+}
+
+/*logo*/
+.logo{
+    max-height: 4rem;
+    height: auto;
+    opacity: 0.8;
+}
+
+.logo:hover, .logo:active{
+    opacity: 1;
+}
+
+/* anchor tags*/
+.footer a, .navbar a{
+    color: #ffffffe0;
+    text-decoration: none;
+}
+
+.footer a:hover, .footer a:active, .footer a:focus,
+.navbar a:hover, .navbar a:active, .navbar a:focus{
+    color: white;
+    font-weight: 547;
+}
+
+a{
+    text-decoration: none;
+}
+/*h1 tag*/
+h1 {
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/*gets rid of bootstrap weird*/
+iframe{
+    display: none;
+}
+
+/*Global classes that other pages can use*/
+/*Form - center and same size input boxes*/
+.center-form{
+    /*Centering form*/
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/*Grid - center and same size input boxes*/
+.grid-container{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.grid-item{
+    text-align: center;
+    width: 25rem;
+    flex: 0 0 1;
+    min-height: 120px;
+    margin: 0.6em 0.6em;
+    padding: 11px;
+    overflow-wrap: break-word;
+
+    border: 0.2rem solid #f2f2f2;
+    border-radius: 0.3rem;
+}
+
+/*same height and width for input fields*/
+input, form label, select{
+    height: 2rem;
+    width: 20rem;
+    text-align: center;
+}
+
+/*form label{*/
+/*    width:auto;*/
+/*}*/
+
+textarea{
+    margin-bottom: -0.25rem;
+    height: 5rem;
+    width: 20rem;
+    text-align: center;
+}
+
+button{
+    height: 2rem;
+    border: none;
+    background: rgb(145 234 234);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+    align-items: center;
+    /*margin-top: 0.5rem;*/
+}
+
+button:hover{
+    background: rgb(129, 220, 220);
+    color: black;
+}
+
+.link-block{
+    color: black;
+    display: flex;
+    justify-content: center;
+    background: rgba(93, 183, 183, 0.75);
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Marketplace</title>
+    <link rel="stylesheet" href="/css/buyRentDisplay.css">
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <!-- Thymeleaf base styling -->
+    <link rel="icon" href="../images/sapling.png">
+    <link rel="stylesheet" th:href="@{/css/adminView.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!-- Thymeleaf header -->
+<div class="contentContainer">
+    <!--Only admins can see this-->
+    <div sec:authorize="hasRole('ADMIN')">
+        <h1 class="adminView">Admin view</h1>
+    </div>
+
+<!-- Filter Dropdowns -->
+
+<form id="searchFilterBlock" action="/buyRent" method="get" th:onchange="submit()">
+        <div id="searchBlock">
+            <!-- Search bar-->
+            <label class="searchFilterLabel" for="searchBar"></label>
+            <!-- Th:value handles saving the query after submission, it is fed the current search -->
+            <input type="text" id="searchBar" th:placeholder="Search" th:default="Search" th:value="${searchQuery}" name="sq">
+        </div>
+        <div id="filterBlock">
+            <!-- Category Dropdown -->
+            <label class="searchFilterLabel" for="categoryFilter"></label>
+            <select id="categoryFilter" class="category" name="cf" >
+                <option th:value="${selectedCategory} ?: 'Category Filters'" th:hidden="hidden" th:readonly="True"
+                        th:text="'Sort By:  ' + (${selectedCategory} ?: 'Category Filters')"></option>
+                <option th:each="category : ${categories}"
+                        th:object="${category}"
+                        th:value="*{categoryName}"
+                        th:text="*{categoryName}"
+                        th:disabled="${selectedCategory} == *{categoryName}">
+                </option>
+                <option th:value="'Category Filters'" th:text="'Reset Filters'"></option>
+            </select>
+            <!-- Listing Filter Dropdown (Buy/Rent) -->
+            <label class="searchFilterLabel" for="listingFilter"></label>
+            <select id="listingFilter" class="category" name="lf" >
+                <option th:value="${selectedListing} ?: 'Listing Filters'" th:hidden="True" th:readonly="True"
+                        th:text="('Sort By:  ' + (${selectedListing} ?: 'Listing Filters'))"></option>
+                <option th:each="listingFilterList : ${listingFilter}"
+                        th:value="${listingFilterList}"
+                        th:text="${listingFilterList}"
+                        th:disabled="${selectedListing} == *{listingFilterList}">
+                </option>
+                <option th:value="'Listing Filters'" th:text="'Reset Filters'"></option>
+            </select>
+            <!-- Price Filter Dropdown (Asc/Desc) -->
+            <label class="searchFilterLabel" for="priceFilter"></label>
+            <select id="priceFilter" class="category" name="pf" >
+                <option th:value="${selectedPrice} ?: 'Price Filters'" th:hidden="True" th:readonly="True"
+                        th:text="('Sort By:  ' + (${selectedPrice} ?: 'Price Filters'))"></option>
+                <option th:each="priceFilterList : ${priceFilter}"
+                        th:value="${priceFilterList}"
+                        th:text="${priceFilterList}"
+                        th:disabled="${selectedPrice} == *{priceFilterList}">
+                </option>
+                <option th:value="'Price Filters'" th:text="'Reset Filters'"></option>
+            </select>
+            <label class="searchFilterLabel" for="createListing"></label>
+            <a id="createListing" class="linkToCreate" th:href="@{buyRent/save}">Create New Listing</a>
+
+        </div>
+</form>
+<!-- CONTENT -->
+<div class="mainContentContainer">
+    <a class="contentBox" th:href="@{buyRent/item/{id}(id=${buyRent.itemId})}" th:object="${buyRent}" th:each="buyRent: ${allBuyRent}">
+            <div sec:authorize="hasRole('ADMIN')">
+                <form th:action="@{/buyRent/delete/{id}(id=${buyRent.itemId})}" method="POST" class="deleteForm" >
+                    <button class="deleteButton delete" type="submit">Delete</button>
+                </form>
+            </div>
+        <p class="contentItemName" th:text="${buyRent.itemName}"></p>
+        <div class="namePriceBox">
+            <p class="contentNamePrice" th:text="*{username}"></p>
+            <p class="contentNamePrice" th:text="'£ '+ *{price}"></p>
+        </div>
+        <div th:if="*{imageB64 != null}">
+            <img class="contentItemImage" alt="Image" th:src="*{'data:image;base64,' + imageB64}">
+        </div>
+        <div th:if="*{imageB64 == null}">
+            <img class="contentItemImage" alt="No image" src="../images/noImage.jpg">
+        </div>
+        <div th:if="*{itemSaleType == '0'}">
+            <p class="contentSaleType" th:text="('To Buy')"></p>
+        </div>
+        <div th:if="*{itemSaleType == '1'}">
+            <p class="contentSaleType" th:text="('To Rent')"></p>
+        </div>
+        <p class="contentDescription" th:text="*{description}"></p>
+    </a>
+    <script sec:authorize="hasRole('ADMIN')" type="text/javascript" th:src="@{/javaScript/deleteComfirmation.js}"></script>
+</div>
+    <p id="searchError" th:text="${isEmpty} ?: 'Error:  No results found for this search'"></p>
+</div>
+
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+<!-- Thymeleaf footer and footer styling -->
+</body>
+</html>

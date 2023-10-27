@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Admin Account Creation!</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+<form th:action="@{/account-create}" th:method ="post" th:object="${adminCreationForm}">
+    <div class="field">
+        <label class="form-label" for="username">Username:</label>
+        <input class="form-control" th:field="*{username}" type="text"/>
+        <div class="alert alert-warning" th:errors="*{username}" th:if="${#fields.hasErrors('username')}">Username Error</div>
+    </div>
+    <div class="field">
+        <label class="form-label" for="password">Password:</label>
+        <input class="form-control" th:field="*{password}" type="password"/>
+        <div class="alert alert-warning" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Password Error</div>
+    </div>
+    <div class="field">
+        <label class="form-label" for="confirmPassword">Confirm Password:</label>
+        <input class="form-control" th:field="*{confirmPassword}" type="password"/>
+        <div class="alert alert-warning" th:errors="*{confirmPassword}" th:if="${#fields.hasErrors('confirmPassword')}">Username Error</div>
+    </div>
+    <div class="field">
+        <label class="form-label" for="user_Role">User Role:</label>
+        <select class="form-control" name="user_Role">
+            <option value="ADMIN">Admin</option>
+            <option value="USER">User</option>
+            <option value="GUEST">Guest</option>
+        </select>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+
+
+</form>
+</div>
+
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>

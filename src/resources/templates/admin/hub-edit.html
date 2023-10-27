@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Edit hub</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link rel="stylesheet" th:href="@{/css/hub-forms.css}"/>
+    <link rel="icon" href="../images/sapling.png">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+    <h1 th:text="'Edit:'+${hub.hubName}"></h1>
+    <form class="center-form" th:action="@{/admin/hub/{hubId}/edit (hubId=${hub.hubId})}" th:method="post" th:object="${hubForm}">
+
+
+        <label for="hubId"> </label>
+        <input id="hubId" th:default="${hub.hubId}" th:disabled="disabled" th:readonly="readonly" th:type="hidden"/>
+
+
+        <!--input fields for hubName, link, address, postcode-->
+        <label for="hubName">Hub Name</label>
+        <!--Attribute th:field will replace attributes value, id and name in your input tag.-->
+        <input type="text" id="hubName" th:default="*{hubName}" th:value="*{hubName}" name="hubName" required>
+        <!--error -->
+        <div class="alert alert-warning" th:errors="*{hubName}" th:if="${#fields.hasErrors('hubName')}">Hub Name Error</div>
+        <div class="alert alert-warning" th:errors="${hubForm}"></div>
+
+        <label for="whichR">Which R (Recyling, reuse, repair)</label>
+        <input type="text" id="whichR" th:default="*{whichR}" th:value="*{whichR}" name="whichR" required>
+        <!--error -->
+        <div class="alert alert-warning" th:errors="*{whichR}" th:if="${#fields.hasErrors('whichR')}">Which R Error</div>
+
+        <div>
+            <!-- Removed required attribute from below as th:value won't autofill for dropdowns :( -->
+            <label class="categoryLabel" for="categoriesList">Category</label><br>
+            <select id="categoriesList" th:value="*{categoriesList}" name="categoriesList" th:required="false" th:multiple="true">
+                <!-- Takes each category from the categoriesList and adds it to the dropdown, as this stores the categories currently
+                assigned to the hub, they are marked as selected -->
+                <option th:each="selectedCategory : *{categoriesList}" th:value="${selectedCategory}" th:text="${selectedCategory}" th:selected="selected"></option>
+                <!-- Takes all the other categories and adds them to the dropdown -->
+                <option th:each="category : *{otherCategoriesList}" th:value="${category}" th:text="${category}" ></option>
+            </select>
+            <p>(To select multiple options please hold control)</p>
+            <!--        error -->
+            <div class="alert alert-warning" th:errors="*{categoriesList}" th:if="${#fields.hasErrors('categoriesList')}">categoriesList Error</div>
+        </div>
+
+        <label for="link">Website link</label>
+        <input type="text" id="link" th:default="*{link}" th:value="*{link}" name="link" required>
+        <!--error -->
+        <div class="alert alert-warning" th:errors="*{link}" th:if="${#fields.hasErrors('link')}">Link Error</div>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" th:default="*{address}" th:value="*{address}" name="address" required>
+        <!--error -->
+        <div class="alert alert-warning" th:errors="*{address}" th:if="${#fields.hasErrors('address')}">Address Error</div>
+
+        <label for="postcode">Postcode</label>
+        <input type="text" id="postcode" th:default="*{postcode}" th:value="*{postcode}" name="postcode" required>
+        <!--error -->
+        <div class="alert alert-warning" th:errors="*{postcode}" th:if="${#fields.hasErrors('postcode')}">Postcode Error</div>
+
+        <label for="phoneNumber">Phone Number</label>
+        <input name="phoneNumber" id="phoneNumber" th:default="*{phoneNumber}" th:value="*{phoneNumber}" required>
+        <!--        error -->
+        <div class="alert alert-warning" th:errors="*{phoneNumber}"
+             th:if="${#fields.hasErrors('phoneNumber')}">Phone Number Field ERROR</div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>

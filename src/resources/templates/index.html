@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Homepage</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link th:replace="fragments/header :: bootstrap-css">
+    <link th:replace="fragments/footer :: footer-style">
+    <link rel="icon" href="../images/sapling.png">
+</head>
+<body id="body">
+<div th:replace="fragments/header :: header"/>
+
+<div class="contentContainer">
+<h1>Newport Recycle, Repair, Reuse</h1>
+<div id="mySlideShow" class="carousel-fade" data-bs-ride="carousel" data-bs-interval="3000"
+     th:object="${index}">
+    <div class="carousel-inner">
+        <div class="carousel-item active" th:if="*{image1 != null and image1 != ''}">
+            <img class = "img-fluid" alt="Image" th:src="*{'data:image;base64,' + image1}">
+        </div>
+
+        <div class="carousel-item active" th:if="*{image1 == null or image1 == ''}">
+            <div class="contentItemImage">
+                <img class = "img-fluid" alt="default" src="../images/index1.jpeg">
+            </div>
+        </div>
+
+        <div class="carousel-item" th:if="*{image2 != null and image2 != ''}">
+            <div class="contentItemImage">
+                <img class = "img-fluid" alt="Image" th:src="*{'data:image;base64,' + image2}">
+            </div>
+        </div>
+
+        <div class="carousel-item" th:if="*{image2 == null or image2 == ''}">
+            <div class="contentItemImage">
+                <img class = "img-fluid" alt="default" src="../images/index2.png">
+            </div>
+        </div>
+
+        <div class="carousel-item" th:if="*{image3 != null and image3 != ''}">
+            <div class="contentItemImage">
+                <img class = "img-fluid" alt="Image" th:src="*{'data:image;base64,' + image3}">
+            </div>
+        </div>
+
+        <div class="carousel-item" th:if="*{image3 == null or image3 == ''}">
+            <div class="contentItemImage">
+                <img class = "img-fluid" alt="default" src="../images/index3.png">
+            </div>
+        </div>
+        <div class="carousel-item" th:if="*{image4 != null and image4 != ''}">
+            <div class="contentItemImage">
+                <img class = "img-fluid" alt="Image" th:src="*{'data:image;base64,' + image4}">
+            </div>
+        </div>
+
+        <div class="carousel-item" th:if="*{image4 == null or image4 == ''}" >
+            <div class="contentItemImage">
+                <img class = "img-fluid" alt="default" src="../images/index4.jpg">
+            </div>
+        </div>
+    </div>
+    <div th:if="*{description != null}" class="textBox" th:text="*{description}">
+    </div>
+    <div th:if="*{description == null}" class="textBox">
+        The UK Government’s Net Zero Strategy sets out how the country will unlock £90 billion in investment to reach
+        ‘net zero’ emissions by 2050. The strategy, which builds on Prime Minister Boris Johnson’s Ten Point Plan,
+        outlines the support that will be provided to businesses and consumers in the transition to clean energy and
+        green technology – including reducing the UK’s reliance on fossil fuels and switching to low carbon travel
+        options like electric vehicles. With the term ‘net zero’ appearing in the news on a daily basis, we decided to
+        take a closer look at what net zero actually means and, more importantly, whether it’s possible.
+    </div>
+
+</div>
+
+
+<script>
+    const carousel = new bootstrap.Carousel('#mySlideShow')
+</script>
+</div>
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: bootstrap-js"></div>
+</body>
+</html>

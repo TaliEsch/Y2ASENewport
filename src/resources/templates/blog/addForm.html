@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Blogging</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <!-- Thymeleaf styling -->
+    <link rel="stylesheet" href="/css/blog-form.css"/>
+    <link rel="icon" href="../images/sapling.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!-- Thymeleaf header -->
+<div class="contentContainer">
+<h1>Add a new blog post</h1>
+<div class ="form">
+    <form class="center-form" th:action="@{/blog/addForm}" th:method ="POST" th:object="${blogAddForm}" enctype="multipart/form-data" id="blogForm">
+
+        <!-- Using thymeleaf, base class names. Enables support for to import basic css styling. These WILL be altered
+        if we use more customised styling -->
+
+        <!-- Title for the blog -->
+        <div class="field">
+            <label class="theWords" for="blogTitle">Blog Title
+                <div class="toMyAsterisk">*</div>
+                :</label>
+            <input class="form-control" th:field="*{blogTitle}" type="text"/>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{blogTitle}"
+                 th:if="${#fields.hasErrors('blogTitle')}">blogTitle Error
+            </div>
+        </div>
+
+        <!-- Name of the user, this can be their real name or just their choice of username -->
+        <div class="field">
+            <label class="theWords" for="username">Display Name:</label>
+            <input class="form-control" th:field="*{username}" type="text"/>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{username}"
+                 th:if="${#fields.hasErrors('username')}">Username Error
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="theWords" for="email">Email Address (for confirmation)<div class="toMyAsterisk">*</div>:</label>
+            <input class="form-control" th:field="*{email}" type="email"/>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{email}"
+                 th:if="${#fields.hasErrors('email')}">Email Error
+            </div>
+        </div>
+
+        <!-- The name of the item the blog is about -->
+        <div class="field">
+            <label class="theWords" for="itemName">The item:</label>
+            <input class="form-control" th:field="*{itemName}" type="text"/>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{itemName}"
+                 th:if="${#fields.hasErrors('itemName')}">userItem Error
+            </div>
+        </div>
+
+        <!-- The items category -->
+        <div class="field">
+            <label class="theWords" for="itemCategory">Category:</label>
+            <select class="form-control" type="text" name="categoryReq" th:field="*{itemCategory}">
+<!--                No category option, chose to do it in HTML rather than add no category to db-->
+                <option value="null">No Category</option>
+                <option th:each="category : ${categories}" th:value="${category.categoryName}"
+                        th:text="${category.categoryName}"></option>
+            </select>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{itemCategory}"
+                 th:if="${#fields.hasErrors('itemCategory')}">userItemDesc Error
+            </div>
+        </div>
+
+        <!--  Optional image attachment for the blog -->
+        <!-- IMPORTANT: This is captured by spring as a MultipartFile, using File etc... will NOT work-->
+        <div class="field">
+            <label class="theWords" for="itemImage">Image:</label>
+            <input class="form-control img" th:field="*{itemImage}" type="file"/>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{itemImage}"
+                 th:if="${#fields.hasErrors('itemImage')}">userItemDesc Error
+            </div>
+            <!-- Image error appears here -->
+            <span class="alert alert-warning" id="imageError"></span>
+            <div th:if="${message!=null}" class="alert alert-warning" th:text="${message}"></div>
+        </div>
+
+        <!-- contact method for bloggers -->
+        <div class="field">
+            <label class="theWords" for="blogContact">Contact Information</label>
+            <input class="form-control" th:field="*{blogContact}" type="text"/>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{blogContact}"
+                 th:if="${#fields.hasErrors('blogContact')}">userBlogContact Error
+            </div>
+        </div>
+
+        <!-- The blog content/description -->
+        <div class="field">
+            <label class="theWords" for="itemDescription">Description
+                <div class="toMyAsterisk">*</div>
+                :</label>
+            <textarea class="form-control" th:field="*{itemDescription}" type="text" rows="4" cols="50"/>
+            <!-- Need to add proper error message + handling, during a later userstory -->
+            <div class="alert alert-warning" th:errors="*{itemDescription}"
+                 th:if="${#fields.hasErrors('itemDescription')}">userItemDesc Error
+            </div>
+        </div>
+
+        <!-- CSRF PROTECTION -->
+        <div class="field">
+            <button class="btn btn-info btn-block g-recaptcha"
+                    data-callback='onSubmit'
+                    type="submit">Submit
+            </button>
+        </div>
+        <div class="hidden">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        </div>
+    </form>
+</div>
+    <script type="text/javascript" th:src="@{/javaScript/imageValidator.js}"></script>
+<div id="captcha">
+</div>
+<script>
+    function onSubmit(token) {
+        document.getElementById("blogForm").submit();
+    }
+</script>
+</div>
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+<!-- Thymeleaf footer goes here -->
+</body>
+</html>

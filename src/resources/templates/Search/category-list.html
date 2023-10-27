@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--thymeleaf link should be a part of header-->
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Hub search</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link th:href="@{/css/category-list.css}" rel="stylesheet"/>
+    <link rel="icon" href="../images/sapling.png">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+    <h1>Search by Categories</h1>
+
+    <!--if no categories were sent then-->
+    <p th:if="${#lists.isEmpty(categories)}">No categories found </p>
+
+    <!--    else-->
+    <div th:if="${!#lists.isEmpty(categories)}">
+
+        <!--Goes through the categories list as a link in a radio-->
+        <form class="form" action="/hubs/search" method="get">
+
+            <!--selection between the categories-->
+            <div class="filterContainer">
+                <label for="search">Category</label>
+                <select id="category" name="q" required>
+                    <!--The default option is All-->
+                    <option value="All" selected>All</option>
+                    <option th:each="category : ${categories}" th:value="${category.categoryName}" th:text="${category.categoryName}"></option>
+                </select>
+            </div>
+            <!--location input-->
+            <div class="filterContainer">
+                <label for="search">Postcode</label>
+                <input type="text" id="postcode" name="p" placeholder="Postcode">
+            </div>
+            <!--submit button-->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!--The uses for thoses categories once the form has been filled in-->
+<!--    <div th:if="${#lists.isEmpty(uses)}">-->
+<!--        <h4>No uses</h4>-->
+<!--    </div>-->
+
+    <!--The uses being displayed-->
+<!--    <div th:if="${!#lists.isEmpty(uses)}">-->
+<!--        <h1 th:text="${category}"></h1>-->
+<!--        <div class="use" th:each="use : ${uses}">-->
+<!--            <p th:text="${use.name}"></p>-->
+<!--            <p th:text="${use.description}"></p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <!--Hubs-->
+    <h3>Hubs near by</h3>
+    <a class="hub" th:each="hub : ${hubs}" th:href="${hub.link}">
+        <!--Make hub name a link-->
+        <h6  th:text="${hub.hubName}"></h6>
+        <h6 th:text="${hub.categoriesList}"></h6>
+        <h6 th:text="${hub.address}"></h6>
+        <p th:text="'Phone Number:  ' + ${hub.phoneNumber}"></p>
+    </a>
+    <div th:if="${#lists.isEmpty(hubs)}">
+        <h5>No hubs found</h5>
+    </div>
+
+    <script text="text/javascript">
+        // on category change, submit the form
+        document.getElementById("category").onchange = function() {
+            document.getElementsByClassName("form")[0].submit();
+        }
+    </script>
+</div>
+
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>

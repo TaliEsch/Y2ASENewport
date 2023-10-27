@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Book</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link th:href="@{/css/booking.css}" rel="stylesheet"/>
+    <link rel="icon" href="../images/sapling.png">
+</head>
+<body>
+<!--Header-->
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+<h1>Make a booking</h1>
+<a id="repairButton" class="link-block" href="/book/repair">Book a repair shop</a>
+
+<!--Goes through each tip-->
+<h2>Newport tips:</h2>
+<div th:each="tip : ${tips}">
+    <div class="card">
+        <a class="card-body" th:href="${tip.link}">
+            <h5 class="card-title" th:text="${tip.hubName}"></h5>
+            <p class="card-text" th:text="${tip.address}"></p>
+        </a>
+    </div>
+</div>
+</div>
+
+<!--Footer-->
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>

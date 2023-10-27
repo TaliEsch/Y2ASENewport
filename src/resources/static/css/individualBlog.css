@@ -1,0 +1,61 @@
+#commentForm{
+    border: 0.2rem solid #d3d3d326;
+    background: #d3d3d32b;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+/*Over writes the alert-warnings bottom-margin: 1rem*/
+.alert-warning:last-of-type{
+    margin-bottom: 0;
+}
+
+.container{
+    text-align: center;
+    width: 90%;
+    margin-left: auto;
+}
+
+#blogIndividual{
+    text-align: center;
+    width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#blogImage img{
+    width: 20rem;
+    border-radius: 0.3rem;
+}
+
+#commentTitle, h3, .comment{
+    border-bottom: 0.15rem solid hsl(195deg 11% 93%);
+}
+
+/*Contains the all the fields from blog*/
+.details{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 0.4rem ;
+}
+
+/*the optional image*/
+.details img{
+    flex: 1 0;
+    width: 100%;
+}
+
+/*All the text info about blog*/
+.description{
+    flex: 3 0;
+    width: 100%;
+    text-align: center;
+}
+@media (max-width: 768px){
+    #blogIndividual{
+        width: 100%;
+    }
+    .details{
+        display: block;
+    }
+}

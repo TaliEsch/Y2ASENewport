@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Blogs</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+<!--    links to the blogs css style file-->
+    <link rel="stylesheet" th:href="@{/css/blogs.css}"/>
+    <link rel="icon" href="../images/sapling.png">
+    <link rel="stylesheet" th:href="@{/css/adminView.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+    <!--Only admins can see this-->
+    <div sec:authorize="hasRole('ADMIN')">
+        <h1 class="adminView">Admin view</h1>
+    </div>
+
+    <a href="/blog/addForm">
+        <div class="link-block">Add blog</div>
+    </a>
+
+<!--Goes through listOfBlogs-->
+<div class="listing">
+
+    <a class="linkBlog" th:each="blog : ${listOfBlogs}" th:href="@{blog/{blogId} (blogId=*{blogId})}" th:object="${blog}" >
+        <div class="blog">
+            <!--Blog title is required from the form-->
+            <h3 th:text="*{blogTitle}"></h3>
+
+            <!-- If image is null-->
+            <div class="details">
+                <div id="blogImage" th:if="*{itemImage != null}">
+                    <img th:src="*{'data:image;base64,' + itemImage}">
+                </div>
+    <!-- if statements stop fields from showing if they are null-->
+                <div class="description">
+                    <p th:if="*{username != null}" th:text="'User: '+*{username}"></p>
+                    <p th:if="*{itemName != null}" th:text="'Item: '+*{itemName}"></p>
+                    <p th:if="*{itemCategory != null}" th:text="'Item category: '+*{itemCategory}"></p>
+                    <p th:if="*{blogContact != null}" th:text="'Item description: '+*{blogContact}"></p>
+                    <!--Description is required from the form-->
+                    <h5>Description:</h5>
+                    <p th:text="*{itemDescription}"></p>
+                </div>
+            </div>
+
+            <!--Admin-->
+            <div sec:authorize="hasRole('ADMIN')">
+                <form th:action="@{/blog/{blogId}/delete (blogId=*{blogId})}" class="deleteForm" method="POST" >
+                    <button class="deleteButton delete" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </a>
+    <script sec:authorize="hasRole('ADMIN')" type="text/javascript" th:src="@{/javaScript/deleteComfirmation.js}"></script>
+</div>
+</div>
+<div th:replace="fragments/footer :: footer-links"></div>
+<div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>

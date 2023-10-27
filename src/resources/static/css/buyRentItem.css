@@ -1,0 +1,138 @@
+.allContent {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.leftContent {
+    width: 46%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    border: 0.2rem solid #f2f2f2;
+    margin: 2rem 2% 1rem;
+}
+
+
+.contentItemName {
+    font-size: 4rem;
+    height: auto;
+    width: auto;
+}
+
+.namePriceBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+
+.contentNamePriceType {
+    width: 32%;
+    height: 100%;
+    border: 0.05rem solid #f2f2f2;
+    margin:0 1% 0;
+    font-size: 1.6rem;
+}
+
+.contentItemImage {
+    max-width: 95%;
+    max-height: 40vh;
+}
+
+.contentDescription {
+    font-size: 1.5rem;
+    margin: 2rem 1rem 1rem;
+}
+
+.rightContent {
+    width: 46%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 0.2rem solid #f2f2f2;
+    margin: 2rem 2% 1rem;
+}
+
+.messageBox {
+    align-self: center;
+    margin: 8rem 1rem 1rem;
+    width: 90%;
+    height: 50%;
+    resize: none;
+    box-sizing: border-box;
+    padding: 1rem;
+    text-align: start;
+    font-size: 1.5rem;
+
+}
+
+#contactInfo{
+    font-size: 1.2rem;
+    align-self: center;
+    width: 60%;
+    padding: 1rem;
+    text-align: center;
+}
+
+#formDisclaimer {
+    font-size: 1.2rem;
+    margin: 1rem 0 1rem;
+}
+
+.submit {
+    margin: 1rem 5rem 1rem;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.1);
+    border-radius: 0;
+    width: 90%;
+    height: 3rem;
+    font-size: 1.1rem;
+    align-self: center;
+    border: 0;
+}
+
+@media (max-width: 768px) {
+    .allContent {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .leftContent {
+        width: 95%;
+    }
+
+    .rightContent {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .messageBox{
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        height: 15rem;
+    }
+
+    .namePriceBox{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contentNamePriceType {
+        font-size: 1.5rem;
+        width: 90%;
+    }
+
+    .paragraphNamePriceType{
+        margin-bottom: 0;
+    }
+
+    .contentItemName {
+        font-size: 3rem;
+    }
+
+}

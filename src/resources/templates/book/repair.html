@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Book repair</title>
+    <link th:replace="fragments/header :: bootstrap-css"/>
+    <link th:href="@{/css/repair-booking.css}" rel="stylesheet"/>
+    <link rel="icon" href="../images/sapling.png">
+</head>
+<body>
+<!--Header-->
+<div th:replace="fragments/header :: header"></div>
+<div class="contentContainer">
+<h1>Repair Booking</h1>
+
+    <div class="successful" th:if="${!#lists.isEmpty(message)}">
+        <div th:each="message : ${message}">
+            <h3 th:text="${message}"></h3>
+        </div>
+    </div>
+
+    <!--Checking if message is sent from the server or not-->
+    <div class="form" th:if="${#lists.isEmpty(message)}">
+        <!--Form-->
+        <form method="post" th:action="@{/book/repair}" th:object="${repair}" class="center-form">
+            <h2>Item</h2>
+            <!--Item name-->
+            <div class="field">
+                <label class="form-label" for="itemName">Item name:</label>
+                <input class="form-control" type="text" id="itemName" th:field="*{itemName}" name="itemName" required>
+                <!--error-->
+                <span class="alert alert-warning" th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}">
+                    Item name error
+                </span>
+            </div>
+            <!--Item description-->
+            <div class="field">
+                <label class="form-label" for="itemDescription">Item description:</label>
+                <textarea class="form-control" id="itemDescription" th:field="*{itemDescription}" rows="4" cols="50" required></textarea>
+                <!--error-->
+                <span class="alert alert-warning" th:if="${#fields.hasErrors('itemDescription')}" th:errors="*{itemDescription}">
+                    Item name error
+                </span>
+            </div>
+            <!--Repair hub-->
+            <div class="field">
+                <label class="form-label" for="hubId">Repair hub:</label>
+                <select class="form-control" id="hubId" th:field="*{hubId}" required>
+                    <option  th:each="hub : ${hubs}" th:value="${hub.hubId}" th:text="${hub.hubName}">Repair Hub 1</option>
+                </select>
+                <!--error-->
+                <span class="alert alert-warning" th:if="${#fields.hasErrors('hubId')}" th:errors="*{hubId}">
+                    Item name error
+                </span>
+            </div>
+
+            <br>
+            <h2>Contact</h2>
+
+            <!--Fullname-->
+            <div class="field">
+                <label class="form-label" for="fullName">Full name:</label>
+                <input class="form-control" id="fullName" type="text" th:field="*{fullName}" required>
+                <!--error-->
+                <span class="alert alert-warning" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">
+                    Item name error
+                </span>
+            </div>
+
+            <!--Email-->
+            <div class="field">
+                <label class="form-label" for="email">Email:</label>
+                <input class="form-control" id="email" type="text" th:field="*{email}" required>
+                <!--error-->
+                <span class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                    Item name error
+                </span>
+            </div>
+            <!--Address-->
+            <div class="field">
+                <label class="form-label" for="address">Address:</label>
+                <input class="form-control" id="address" type="text" th:field="*{address}" required>
+                <!--error-->
+                <span class="alert alert-warning" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
+                    Item name error
+                </span>
+            </div>
+            <!--Button-->
+            <button type="submit">Submit</button>
+
+        </form>
+    </div>
+</div>
+    <!--Footer-->
+    <div th:replace="fragments/footer :: footer-links"></div>
+    <div th:replace="fragments/footer :: footer-style"></div>
+</body>
+</html>
