@@ -1,0 +1,97 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'checkstyle'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-test'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// JDBC
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+
+	// geocoding support
+	implementation "com.byteowls:jopencage:1.4.0"
+
+	// JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// ################## support for a specific database
+	// H2
+	runtimeOnly('com.h2database:h2')
+	// h2 driver
+	implementation 'com.h2database:h2'
+
+	// MariaDB
+	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'org.mariadb.jdbc:mariadb-java-client'
+	implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.6'
+
+	// Jaxb
+	implementation 'com.sun.xml.bind:jaxb-core:3.0.0'
+	// spring mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	// thymeleaf extra security
+	implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE"
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+//tool configuration
+checkstyle {
+	toolVersion = 9.2
+	checkstyleMain.enabled = true
+	checkstyleTest.enabled = false
+}
+
+checkstyleMain {
+	configFile = file("config/checkstyle/checkstyleMain.xml")
+	maxErrors = 1000
+}
+
+// Path: application-prod.properties
+tasks.register('bootRunProd') {
+	group = 'application'
+	description = 'Runs this project as a production environment (mariaDB)'
+	doFirst{
+		tasks.bootRun.configure {
+			systemProperty 'spring.profiles.active', 'prod'
+		}
+	}
+	finalizedBy 'bootRun'
+}
+
+springBoot {
+	mainClass = 'com.example.WasteManagementApplication'
+}
